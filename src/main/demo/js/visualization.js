@@ -1,4 +1,5 @@
 var w = 1024, h = 768, node, link, root, force, vis;
+var i = 0;
 
 function update() {
 	var nodes = flatten(root);
@@ -34,7 +35,7 @@ function update() {
 	// Enter any new nodes.	
 	node.enter().append("svg:g").attr("class", "node").call(force.drag);
 	node.html('');
-	node.append("svg:circle")
+	node.append(createNodeShape)
 		.attr("cx", function(d) { return 0; })
 		.attr("cy", function(d) { return 0; })
 		.attr("r", function(d) { return nodeSize(d); })
@@ -59,6 +60,23 @@ function update() {
 
 	// Remove any old nodes.
 	node.exit().remove();
+}
+
+function createNodeShape(d) {
+	var shape;
+	if (d.type == 'root') {
+		shape = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
+		shape.setAttribute('x', -20);
+		shape.setAttribute('y', -20);
+		shape.setAttribute('width', 40);
+		shape.setAttribute('height', 40);
+	} else {
+		shape = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "circle")
+		shape.setAttribute('cx', 0);
+		shape.setAttribute('cy', 0);
+		shape.setAttribute('r', nodeSize(d));
+	}
+	return shape;
 }
 
 function nodeSize(d) {
@@ -114,7 +132,7 @@ function click(d) {
 
 // Returns a list of all nodes under the root.
 function flatten(root) {
-	var nodes = [], i = 0;
+	var nodes = [];
 
 	function nodeSize(node) {
 		if (node.children)
@@ -140,9 +158,9 @@ function onAddNode() {
 	      "name": "new-node",
 	      "type" : "node",
 	      "children": [
-	        { "name": "gear-1", "type" : "gear", "size" : 1000 },
-	        { "name": "gear-2", "type" : "gear", "size" : 500 },
-	        { "name": "gear-4", "type" : "gear", "size" : 2000 }
+	        { "name": "gear-1", "type" : "gear", "size" : 10 },
+	        { "name": "gear-2", "type" : "gear", "size" : 5 },
+	        { "name": "gear-4", "type" : "gear", "size" : 20 }
 	      ]
 	    });
 	update();
@@ -152,13 +170,13 @@ $(document).ready(
 		function() {
 			force = d3.layout.force().on("tick", tick).charge(function(d) {
 				if (d.type == 'root') {
-					return -300;
+					return -400;
 				}
 				if (d.type == 'node') {
-					return -300;
+					return -400;
 				}
 				if (d.type == 'gear') {
-					return -600;
+					return -900;
 				}
 			}).linkDistance(function(d) {
 				return d.target.type == 'gear' ? 40 : 150;
