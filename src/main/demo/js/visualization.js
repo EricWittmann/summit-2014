@@ -45,18 +45,7 @@ function update() {
 		.attr("dx", function(d) { return nodeSize(d) + 5; })
 		.attr("dy", ".35em")
 		.attr("class", "node-label")
-		.text(function(d) { return d.name });
-	
-	
-//	node.enter().append("svg:circle").attr("class", "node").attr("cx",
-//			function(d) {
-//				return d.x;
-//			}).attr("cy", function(d) {
-//				return d.y;
-//			}).attr("r", function(d) {
-//				return d.children ? 25 : 15;
-//			}).style("fill", color).on("click", click).call(force.drag);
-	
+		.text(function(d) { return d.name == 'root' ? '' : d.name });
 
 	// Remove any old nodes.
 	node.exit().remove();
@@ -66,10 +55,10 @@ function createNodeShape(d) {
 	var shape;
 	if (d.type == 'root') {
 		shape = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
-		shape.setAttribute('x', -20);
-		shape.setAttribute('y', -20);
-		shape.setAttribute('width', 40);
-		shape.setAttribute('height', 40);
+		shape.setAttribute('x', 0);
+		shape.setAttribute('y', 0);
+		shape.setAttribute('width', 0);
+		shape.setAttribute('height', 0);
 	} else {
 		shape = this.ownerDocument.createElementNS("http://www.w3.org/2000/svg", "circle")
 		shape.setAttribute('cx', 0);
@@ -83,7 +72,7 @@ function nodeSize(d) {
 	if (d.type == 'root') {
 		return 30;
 	}
-	if (d.type == 'node') {
+	if (d.type == 'profile') {
 		if (isCollapsed(d)) {
 			return 15;
 		} else {
@@ -105,12 +94,6 @@ function tick() {
 	});
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    
-//    node.attr("cx", function(d) {
-//		return d.x;
-//	}).attr("cy", function(d) {
-//		return d.y;
-//	});
 }
 
 // Color leaf nodes orange, and packages white or blue.
@@ -153,27 +136,87 @@ function isCollapsed(d) {
 	return d._children;
 }
 
-function onAddNode() {
+
+function onAddCompute3() {
 	root.children.push({
-	      "name": "new-node",
-	      "type" : "node",
+	      "name": "compute3",
+	      "type" : "profile",
 	      "children": [
-	        { "name": "gear-1", "type" : "gear", "size" : 10 },
-	        { "name": "gear-2", "type" : "gear", "size" : 5 },
-	        { "name": "gear-4", "type" : "gear", "size" : 20 }
 	      ]
 	    });
 	update();
 }
 
+function onAddCompute4() {
+	root.children.push({
+	      "name": "compute4",
+	      "type" : "profile",
+	      "children": [
+	      ]
+	    });
+	update();
+}
+
+function onAddCompute3_Gears1() {
+	root.children[2].children.push(
+			{ "name": "gear-1", "type" : "gear", "size" : 10 }
+	);
+	root.children[2].children.push(
+			{ "name": "gear-2", "type" : "gear", "size" : 10 }
+	);
+	update();
+}
+
+function onAddCompute4_Gears1() {
+	root.children[3].children.push(
+			{ "name": "gear-1", "type" : "gear", "size" : 10 }
+	);
+	root.children[3].children.push(
+			{ "name": "gear-2", "type" : "gear", "size" : 10 }
+	);
+	update();
+}
+
+function addRemaining_Gears() {
+	root.children[2].children.push(
+			{ "name": "gear-3", "type" : "gear", "size" : 10 }
+	);
+	root.children[2].children.push(
+			{ "name": "gear-4", "type" : "gear", "size" : 10 }
+	);
+	root.children[3].children.push(
+			{ "name": "gear-3", "type" : "gear", "size" : 10 }
+	);
+	root.children[3].children.push(
+			{ "name": "gear-4", "type" : "gear", "size" : 10 }
+	);
+	update();
+}
+
+function onAddCompute2_Gears() {
+	root.children[1].children.push(
+			{ "name": "gear-1", "type" : "gear", "size" : 10 }
+	);
+	root.children[1].children.push(
+			{ "name": "gear-2", "type" : "gear", "size" : 10 }
+	);
+	update();
+}
+
+function onKillCompute2() {
+	root.children.splice(1, 1);
+	update();
+}
+
+
 $(document).ready(
 		function() {
 			force = d3.layout.force().on("tick", tick).charge(function(d) {
 				if (d.type == 'root') {
-					return -400;
+					return -1000;
 				}
-				if (d.type == 'node') {
-					return -400;
+				if (d.type == 'profile') {
+					return -1000;
 				}
 				if (d.type == 'gear') {
 					return -900;
@@ -189,7 +232,13 @@ $(document).ready(
 				try {
 					root = json;
 					update();
-					$('#add-node').click(onAddNode);
+					$('#add-compute2-gears').click(onAddCompute2_Gears);
+					$('#add-compute3').click(onAddCompute3);
+					$('#add-compute4').click(onAddCompute4);
+					$('#add-compute3-gears1').click(onAddCompute3_Gears1);
+					$('#add-compute4-gears1').click(onAddCompute4_Gears1);
+					$('#add-remaining-gears').click(addRemaining_Gears);
+					$('#kill-compute2').click(onKillCompute2);
 				} catch (e) {
 					alert(e);
 				}

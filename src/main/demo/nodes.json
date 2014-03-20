@@ -3,34 +3,16 @@
   "type" : "root",
   "children": [
     {
-      "name": "node-1",
-      "type" : "node",
+      "name": "compute1",
+      "type" : "profile",
       "children": [
-        { "name": "gear-1", "type" : "gear", "size" : 10 },
-        { "name": "gear-2", "type" : "gear", "size" : 5 },
-        { "name": "gear-3", "type" : "gear", "size" : 10 },
-        { "name": "gear-4", "type" : "gear", "size" : 20 }
+        { "name": "gear-1", "type" : "gear", "size" : 10 }
       ]
     },
     {
-      "name": "node-2",
-      "type" : "node",
+      "name": "compute2",
+      "type" : "profile",
       "children": [
-        { "name": "gear-1", "type" : "gear", "size" : 10 },
-        { "name": "gear-2", "type" : "gear", "size" : 5 },
-        { "name": "gear-3", "type" : "gear", "size" : 10 }
-      ]
-    },
-    {
-      "name": "node-3",
-      "type" : "node",
-      "children": [
-        { "name": "gear-1", "type" : "gear", "size" : 10 },
-        { "name": "gear-2", "type" : "gear", "size" : 5 },
-        { "name": "gear-3", "type" : "gear", "size" : 5 },
-        { "name": "gear-4", "type" : "gear", "size" : 5 },
-        { "name": "gear-5", "type" : "gear", "size" : 20 },
-        { "name": "gear-6", "type" : "gear", "size" : 20 }
       ]
     }
   ]
