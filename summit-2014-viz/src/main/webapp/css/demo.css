@@ -1,18 +1,101 @@
+@-webkit-keyframes pulse-profile
+{
+  0%   { stroke-width: 2px; }
+  50%  { stroke-width: 4px; }
+  100% { stroke-width: 2px; }
+}
+@keyframes pulse-profile
+{
+  0%   { stroke-width: 2px; }
+  50%  { stroke-width: 4px; }
+  100% { stroke-width: 2px; }
+}
+@-webkit-keyframes pulse-gear
+{
+  0%   { stroke-width: .5px; }
+  50%  { stroke-width: 8px; }
+  100% { stroke-width: .5px; }
+}
+@keyframes pulse-gear
+{
+  0%   { stroke-width: .5px; }
+  50%  { stroke-width: 8px; }
+  100% { stroke-width: .5px; }
+}
+@-webkit-keyframes pulse-link
+{
+  0%   { stroke-width: 1.5px; }
+  50%  { stroke-width: 4px; }
+  100% { stroke-width: 1.5px; }
+}
+@keyframes pulse-link
+{
+  0%   { stroke-width: 1.5px; }
+  50%  { stroke-width: 4px; }
+  100% { stroke-width: 1.5px; }
+}
+
 
 .content {
   margin-top: 60px;
 }
 
-.node {
+.node-root rect {
+  fill: white;
+  stroke: white;
+}
+
+.node-profile, .node-gear {
   cursor: pointer;
-  stroke: #000;
+}
+.node-profile {
+  fill: #62B1D0;
+  stroke: #0776A0;
+  stroke-width: 2px;
+}
+.node-gear {
   stroke-width: .5px;
+  fill: #ddd;
+  stroke: #ddd;
+}
+.node-profile.pulse {
+  -webkit-animation: pulse-profile 0.7s;
+  animation: pulse-profile 0.7s;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:10;
+}
+.node-gear.pulse {
+  -webkit-animation: pulse-gear 0.7s;
+  animation: pulse-gear 0.7s;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:10;
+}
+.node-gear.node-active {
+  fill: #0776A0;
+  stroke: #0776A0;
 }
 
 line.link {
   fill: none;
-  stroke: #9ecae1;
+}
+
+line.link-to-profile {
+  stroke-width: .5px;
+  stroke: white;
+}
+
+line.link-to-gear {
+  stroke: #ddd;
   stroke-width: 1.5px;
+}
+line.link-to-gear.link-active {
+  stroke: #0776A0;
+}
+line.link-to-gear.pulse {
+  -webkit-animation: pulse-link 0.7s;
+  animation: pulse-link 0.7s;
+  animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:10;
 }
 
 text.node-label {
@@ -22,3 +105,5 @@ text.node-label {
   text-decoration: none;
   stroke-width: 0px;
 }
+
+

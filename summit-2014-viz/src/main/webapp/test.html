@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Red Hat Summit Demo 2014">
+
+    <title>Red Hat Summit Demo 2014</title>
+
+    <link href="lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
+    <link href="css/demo.css" rel="stylesheet" media="screen"></link>
+
+    <script type="text/javascript" src="lib/jquery-1.10.2/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/d3-3.4.3/js/d3.min.js"></script>
+    <script type="text/javascript" src="js/visualization.js"></script>
+    <script type="text/javascript" src="app/app.nocache.js"></script>
+  </head>
+
+  <body>
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Red Hat Summit Keynote Demo 2014</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container content">
+      <div class="row">
+        <button id="add-some" class="btn btn-primary">Add Some</button> &nbsp;
+        <button id="add-more" class="btn btn-primary">Add More</button> &nbsp;
+        <input placeholder="Enter a valid gear id" class="form-control" style="display:inline; width: 200px; margin-right: 5px;" type="text" id="gear-id"></input><button id="enable-gear" class="btn btn-primary">Enable Gear</button>&nbsp;
+        <input placeholder="Enter a valid gear id" class="form-control" style="display:inline; width: 200px; margin-right: 5px;" type="text" id="dgear-id"></input><button id="disable-gear" class="btn btn-primary">Disable Gear</button>&nbsp;
+      </div>
+      <div class="row graph">
+      </div>
+    </div> <!-- /container -->
+
+    <script>
+      var data = {
+              "name": "root",
+              "type" : "root",
+              "children": [
+                {
+                  "name": "compute1",
+                  "type" : "profile",
+                  "children": [
+                               { "name": "gear-1", "type" : "gear", "size" : 12, "active" : true },
+                               { "name": "gear-2", "type" : "gear", "size" : 12, "active" : false }
+                  ]
+                },
+                {
+                  "name": "compute2",
+                  "type" : "profile",
+                  "children": [
+                               { "name": "gear-1", "type" : "gear", "size" : 12, "active" : false },
+                               { "name": "gear-2", "type" : "gear", "size" : 12, "active" : false }
+                  ]
+                }
+              ]
+            };
+      $(document).ready(function() {
+    	  update(data);
+          $('#add-some').click(function() {
+        	  data.children.push({
+                  "name": "compute-new",
+                  "type" : "profile",
+                  "children": [
+                               { "name": "gear-1", "type" : "gear", "size" : 12, "active" : false }
+                  ]
+        	  });
+        	  update(data);
+          });
+          $('#add-more').click(function() {
+              data.children.push({
+                  "name": "compute-new",
+                  "type" : "profile",
+                  "children": [
+                               { "name": "gear-1", "type" : "gear", "size" : 12, "active" : false },
+                               { "name": "gear-2", "type" : "gear", "size" : 12, "active" : false },
+                               { "name": "gear-3", "type" : "gear", "size" : 12, "active" : false },
+                               { "name": "gear-4", "type" : "gear", "size" : 12, "active" : false }
+                  ]
+              });
+              update(data);
+          });
+          $('#enable-gear').click(function() {
+        	  activateGear($('#gear-id').val());
+          });
+          $('#disable-gear').click(function() {
+        	  deactivateGear($('#dgear-id').val());
+          });
+      });
+    </script>
+    
+  </body>
+</html>
