@@ -34,7 +34,7 @@
         <button id="add-some" class="btn btn-primary">Add Some</button> &nbsp;
         <button id="add-more" class="btn btn-primary">Add More</button> &nbsp;
         <input placeholder="Enter a valid gear id" class="form-control" style="display:inline; width: 200px; margin-right: 5px;" type="text" id="gear-id"></input><button id="enable-gear" class="btn btn-primary">Enable Gear</button>&nbsp;
-        <input placeholder="Enter a valid gear id" class="form-control" style="display:inline; width: 200px; margin-right: 5px;" type="text" id="dgear-id"></input><button id="disable-gear" class="btn btn-primary">Disable Gear</button>&nbsp;
+        <button id="disable-gear" class="btn btn-primary">Disable Gear</button>&nbsp;
       </div>
       <div class="row graph">
       </div>
@@ -92,7 +92,7 @@
         	  activateGear($('#gear-id').val());
           });
           $('#disable-gear').click(function() {
-        	  deactivateGear($('#dgear-id').val());
+        	  deactivateGear($('#gear-id').val());
           });
       });
     </script>
