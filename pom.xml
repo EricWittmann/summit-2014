@@ -102,7 +102,9 @@
 
   <modules>
     <module>summit-2014-viz</module>
+    <module>summit-2014-viz-fuse61</module>
     <module>summit-2014-dev-server</module>
+    <module>summit-2014-dist-fuse61</module>
   </modules>
 
   <dependencyManagement>
