@@ -81,6 +81,11 @@
               ]
       };
       
+      // Activate 1-1
+      function demo_step1() {
+          activateGear(data.children[1].children[0].id);
+          window.setTimeout(demo_step2, 5000);
+      }
       // Add compute3
       function demo_step2() {
           data.children.push(compute3);
@@ -116,7 +121,7 @@
       // Activate 4-2
       function demo_step8() {
           activateGear(data.children[3].children[1].id);
-          window.setTimeout(demo_step9, 3000);
+          window.setTimeout(demo_step9, 100);
       }
       // Activate 4-3
       function demo_step9() {
@@ -137,7 +142,7 @@
       $(document).ready(function() {
     	  update(data);
           $('#play').click(function() {
-        	  demo_step2();
+        	  demo_step1();
           });
       });
     </script>
