@@ -190,6 +190,90 @@ function deactivateGear(whichGear) {
     }
 }
 
+
+/**
+ * Finds a child node by name.
+ * @param node
+ * @param childName
+ */
+function findNamedChild(node, childName) {
+	var numChildren = node.children.length;
+	for (var i = 0; i < numChildren; i++) {
+		var child = node.children[i];
+		if (child.name == childName) {
+			return child;
+		}
+	}
+	return null;
+}
+
+
+/**
+ * Merges the contents of the source JSON tree into the
+ * target tree.  Removes anything that is no longer relevant
+ * and adds in any nodes that are new.
+ * 
+ * Also invokes "activateGear" on any gear that went from 
+ * active:false to active:true, as well as the reverse.
+ * 
+ * @param source
+ * @param target
+ */
+function mergeInto(source, target) {
+	if (source.type == 'root') {
+		// Handle new and updated child nodes
+		var numSrcChildren = source.children.length;
+		for (var i = 0; i < numSrcChildren; i++) {
+			var srcProfile = source.children[i];
+			var tgtProfile = findNamedChild(target, srcProfile.name);
+			if (tgtProfile) {
+				mergeInto(srcProfile, tgtProfile);
+			} else {
+				target.children.push(srcProfile);
+			}
+		}
+		// Handle deleted child nodes
+		var numTgtChildren = target.children.length;
+		for (var i = numTgtChildren - 1; i >= 0; i--) {
+			var tgtProfile = target.children[i];
+			var srcProfile = findNamedChild(source, tgtProfile.name);
+			if (!srcProfile) {
+				target.children.splice(i, 1);
+			}
+		}
+
+	} else if (source.type == 'profile') {
+		// Handle new and updated child nodes
+		var numSrcChildren = source.children.length;
+		for (var i = 0; i < numSrcChildren; i++) {
+			var srcGear = source.children[i];
+			var tgtGear = findNamedChild(target, srcGear.name);
+			if (tgtGear) {
+				mergeInto(srcGear, tgtGear);
+			} else {
+				target.children.push(srcGear);
+			}
+		}
+		// Handle deleted child nodes
+		var numTgtChildren = target.children.length;
+		for (var i = numTgtChildren - 1; i >= 0; i--) {
+			var tgtGear = target.children[i];
+			var srcGear = findNamedChild(source, tgtGear.name);
+			if (!srcGear) {
+				target.children.splice(i, 1);
+			}
+		}
+	} else if (source.type == 'gear') {
+		if (source.active && !target.active) {
+			target.active = true;
+			activateGear(target.id);
+		} else if (!source.active && target.active) {
+			target.active = false;
+			deactivateGear(target.id);
+		}
+	}
+}
+
 $(document).ready(
 		function() {
 			force = d3.layout.force().on("tick", tick).charge(function(d) {
