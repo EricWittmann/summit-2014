@@ -88,6 +88,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
@@ -99,6 +100,7 @@
       <plugin>
         <groupId>org.switchyard</groupId>
         <artifactId>switchyard-plugin</artifactId>
+        <version>${switchyard.version}</version>
         <configuration>
           <scannerClassNames>
             <param>org.switchyard.transform.config.model.TransformSwitchYardScanner</param>
@@ -115,6 +117,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -126,6 +129,7 @@
       <plugin>
         <groupId>org.jboss.as.plugins</groupId>
         <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>7.5.Final</version>
         <configuration>
           <skip>false</skip>
         </configuration>
@@ -133,6 +137,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
         <configuration>
           <mainClass>org.overlord.rtgov.quickstarts.demos.orders.OrdersClient</mainClass>
           <classpathScope>test</classpathScope>
