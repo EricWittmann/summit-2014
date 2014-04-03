@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ordermgmt</artifactId>
+  <groupId>com.redhat.summit-2014</groupId>
+  <version>1.0.0.Demo</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>ordermgmt-requirements</module>
+    <module>ordermgmt-api</module>
+    <module>ordermgmt-impl</module>
+  </modules>
+
+  <properties>
+    <rtgov.version>1.0.1.Final-redhat-4</rtgov.version>
+    <switchyard.version>1.1.1-p5-redhat-1</switchyard.version>
+
+    <version.org.overlord.sramp-s-ramp-wagon>0.4.1-SNAPSHOT</version.org.overlord.sramp-s-ramp-wagon>
+  </properties>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.overlord.sramp</groupId>
+        <artifactId>s-ramp-wagon</artifactId>
+        <version>${version.org.overlord.sramp-s-ramp-wagon}</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

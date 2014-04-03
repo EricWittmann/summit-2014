@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.redhat.summit-2014</groupId>
+    <artifactId>ordermgmt</artifactId>
+    <version>1.0.0.Demo</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>ordermgmt-requirements</artifactId>
+
+  <properties>
+    <signal>AnalysisArtifactsComplete</signal>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>local-sramp-repo</id>
+      <name>S-RAMP Releases Repository</name>
+      <url>sramp://localhost:8080/s-ramp-server/?artifactType=RequirementsArchive&amp;artifactGrouping=Project-OrderManagement-${project.version}</url>
+    </repository>
+  </distributionManagement>
+
+</project>
