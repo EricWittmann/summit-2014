@@ -9,6 +9,7 @@
   <name>Overlord RTGov::Samples::JBossAS::OrderManagement::App</name>
 
   <properties>
+    <rtgov.version>1.0.1.Final-redhat-4</rtgov.version>
     <switchyard.version>1.1.1-p5-redhat-1</switchyard.version>
   </properties>
 
@@ -16,18 +17,18 @@
     <dependency>
       <groupId>org.overlord.rtgov.integration</groupId>
       <artifactId>rtgov-client</artifactId>
-      <version>${project.version}</version>
+      <version>${rtgov.version}</version>
     </dependency>
     <dependency>
       <groupId>org.overlord.rtgov.integration</groupId>
       <artifactId>rtgov-switchyard</artifactId>
-      <version>${project.version}</version>
+      <version>${rtgov.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.overlord.rtgov.active-queries</groupId>
       <artifactId>active-collection</artifactId>
-      <version>${project.version}</version>
+      <version>${rtgov.version}</version>
       <scope>provided</scope>
     </dependency>
 
