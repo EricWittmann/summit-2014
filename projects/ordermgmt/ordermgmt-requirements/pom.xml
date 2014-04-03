@@ -18,7 +18,7 @@
     <repository>
       <id>local-sramp-repo</id>
       <name>S-RAMP Releases Repository</name>
-      <url>sramp://localhost:8080/s-ramp-server/?artifactType=RequirementsArchive&amp;artifactGrouping=Project-OrderManagement-${project.version}</url>
+      <url>sramp://localhost:8080/s-ramp-server/?artifactType=RequirementsArchive&amp;artifactGrouping=Project.OrderManagement.${project.version}</url>
     </repository>
   </distributionManagement>
 

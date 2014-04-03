@@ -18,7 +18,7 @@
     <repository>
       <id>local-sramp-repo</id>
       <name>S-RAMP Releases Repository</name>
-      <url>sramp://localhost:8080/s-ramp-server/?artifactType=JavaArchive&amp;artifactGrouping=Project-OrderManagement-${project.version}</url>
+      <url>sramp://localhost:8080/s-ramp-server/?artifactType=JavaArchive&amp;artifactGrouping=Project.OrderManagement.${project.version}</url>
     </repository>
   </distributionManagement>
 </project>
