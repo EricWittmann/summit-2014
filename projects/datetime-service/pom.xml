@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.redhat.summit-2014</groupId>
+  <artifactId>datetime-service</artifactId>
+  <version>1.0.1.Demo</version>
+  <packaging>war</packaging>
+  <name>datetime-service</name>
+  <description>A simple date-time service.</description>
+
+  <properties>
+    <version.org.overlord.sramp-s-ramp-wagon>0.4.1-SNAPSHOT</version.org.overlord.sramp-s-ramp-wagon>
+  </properties>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.overlord.sramp</groupId>
+        <artifactId>s-ramp-wagon</artifactId>
+        <version>${version.org.overlord.sramp-s-ramp-wagon}</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>local-sramp-repo</id>
+      <name>S-RAMP Releases Repository</name>
+      <url>sramp://localhost:8080/s-ramp-server/?artifactType=JavaWebArchive</url>
+    </repository>
+  </distributionManagement>
+  
+</project>
